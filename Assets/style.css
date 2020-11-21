@@ -1,0 +1,82 @@
+.header{
+    background-color:lightblue;
+    text-align: center;
+    padding: 5px;
+}
+/* body{
+    background-image: url("./image_weather.jpg");
+  
+    min-height: 380px;
+ 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  /* Needed to position the navbar */
+  /* position: relative; */
+ 
+    
+    #city{
+       width:800px;
+       height:320px;
+       padding: 10px;
+       margin: 10px; 
+       margin-top: 30px; 
+       color:white;
+       
+       background-color: transparent;
+       
+    }
+
+ #container{
+    display: flex;
+    flex-wrap: wrap;
+}  
+
+.navbar{
+  
+    width: 400px;
+    height:300px;
+   
+    padding: 10px;
+    padding-left: 10px;
+    margin: 30px;  
+    display:flex;
+    align-items: flex-start;
+    background-color: transparent !important;
+}
+
+
+#containerForecast{
+display:flex;
+width:1250px;
+height:300px;
+padding: 10px;
+padding-left: 10px;
+margin: 30px;
+margin-top: 20px;
+background-color: transparent;
+ }
+ .card{
+     margin:5px;
+     color:white;
+   
+ }
+
+ p{
+     padding-left: 10px;
+   }
+
+ /* Cards are stacked on top of each other at 768px or smaller */
+ /* @media screen and (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
+} */
+
+/* Cards are split into two columns at 992px or smaller */
+/* @media screen and (max-width: 992px) {
+    .card {
+      width: 50%;
+    }
+} */ 
