@@ -1,13 +1,51 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Covid Hotel Booking</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hotel booking</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-ui/4.11.0/index.min.js"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" /> -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+  <link rel="stylesheet" href="Assets/style.css" />
+  <h1 class="header">Hotel booking</h1>
 </head>
+
 <body>
+  <div id="container">
+    <nav class="navbar navbar-light bg-light">
+      <form class="form-inline">
+        <h3 style="color:white;">click to get response:</h3>
+        <input class="form-control mr-sm-2" id="input_city" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0 button1" type="submit">Search</button>
+      </form>
+    </nav>
+<div id="default"></div>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!--jQuery-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script><!--moment-->
+  </div>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  
+  <script src="Assets/script.js"></script>
 </body>
-</html>
+</html> 
+
+<!-- import React from 'react';
+import ReactDOM from 'react-dom';
+import Button from '@material-ui/core/Button';
+
+function App() {
+  return ( 
+    <Button variant="contained" color="primary">
+      Hello World
+    </Button>
+   );
+}
+
+ReactDOM.render(<App />, document.querySelector('#app'));
+   -->
