@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>hotel booking</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-ui/4.11.0/index.min.js"/>
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-ui/4.11.0/index.min.js"/> --> <!-- for some reason this is giving a MIME erros, but doesn't seem to be distrupting the page-->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
   <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" /> -->
@@ -21,8 +21,8 @@
     <nav class="navbar navbar-light bg-light">
       <form class="form-inline">
         <h3 style="color:white;">click to get response:</h3>
-        <input class="form-control mr-sm-2" id="input_city" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0 button1" type="submit">Search</button>
+        <input class="form-control mr-sm-2" id="inputCity" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0 button1" id="submitButton">Search</button>
       </form>
     </nav>
 <div id="default"></div>
