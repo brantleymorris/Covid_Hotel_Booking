@@ -10,7 +10,7 @@ const hotelSettings = {
 	}
 };
 
-var city = "San Francisco";
+var city = "Austin";
 hotelSettings.url = "https://hotels4.p.rapidapi.com/locations/search?query=" + city + "&locale=en_US";
 
 $.ajax(hotelSettings).done(function (response) {
@@ -30,6 +30,15 @@ $.ajax(hotelSettings).done(function (response) {
 		}
 	});
 
+	// Determine layout size by number of hotels
+	var layoutSize = 12;
+
+	if(hotels.length == 2) {
+		layoutSize = 6;
+	} else if(hotels.length >= 3) {
+		layoutSize = 4;
+	}
+	 
 	hotels.forEach(function (hotel) {
 		hotelSettings.url = "https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id=" + hotel.id;
 
@@ -40,7 +49,7 @@ $.ajax(hotelSettings).done(function (response) {
 			var hotelImage = hotelImages[0].baseUrl.replace("{size}", "z");
 
 		
-			var cardWrapper = $("<div>").attr("class", "mdl-cell mdl-cell--4-col");
+			var cardWrapper = $("<div>").attr("class", "mdl-cell mdl-cell--" + layoutSize + "-col");
 			var card = $("<div>").attr("class", "demo-card-wide mdl-card mdl-shadow--2dp");
 
 			var titleWrapper = $("<div>").attr("class", "mdl-card__title").css("background-image", "url(" + hotelImage + ")");
@@ -57,5 +66,4 @@ $.ajax(hotelSettings).done(function (response) {
 			hotelSuggestions.append(cardWrapper);
 		});
 	})
-
 });
