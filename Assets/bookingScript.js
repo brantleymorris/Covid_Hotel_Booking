@@ -40,13 +40,13 @@ $.ajax(hotelSettings).done(function (response) {
 	} else if(hotels.length >= 3) {
 		layoutSize = 4;
 	}
-	 
+	hotelSuggestions.empty();
 	hotels.forEach(function (hotel) {
 		hotelSettings.url = "https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id=" + hotel.id;
 
 		$.ajax(hotelSettings).done(function (response) {
 			$("#container_destinations").attr("class", "hide");
-
+			
 			var hotelImages = response.hotelImages;
 
 			console.log(hotel.name);
