@@ -1,82 +1,284 @@
-.header{
-    background-color:lightblue;
-    text-align: center;
-    padding: 5px;
+
+.demo-card-wide.mdl-card {
+  width: 512px;
+
 }
-/* body{
-    background-image: url("./image_weather.jpg");
-  
-    min-height: 380px;
- 
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url('https://exp.cdn-hotels.com/hotels/1000000/10000/8800/8737/2ac8a84b_y.jpg') center / cover;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+
+
+
+#mainImage{
+  background-image: url(./images/para.jpg);
+  min-height: 480px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  
-  /* Needed to position the navbar */
-  /* position: relative; */
- 
-    
-    #city{
-       width:800px;
-       height:320px;
-       padding: 10px;
-       margin: 10px; 
-       margin-top: 30px; 
-       color:white;
-       
-       background-color: transparent;
-       
-    }
-
- #container{
-    display: flex;
-    flex-wrap: wrap;
-}  
-
-.navbar{
-  
-    width: 400px;
-    height:300px;
-   
-    padding: 10px;
-    padding-left: 10px;
-    margin: 30px;  
-    display:flex;
-    align-items: flex-start;
-    background-color: transparent !important;
+  position: relative;
 }
 
+.searchSite{
+    /*Adding properties on the text on image */
+    position: absolute;
+    bottom: 50px;
+    right: 100px;
+    color:whitesmoke;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: serif;
+     
+  } 
 
-#containerForecast{
-display:flex;
-width:1250px;
-height:300px;
-padding: 10px;
-padding-left: 10px;
-margin: 30px;
-margin-top: 20px;
-background-color: transparent;
- }
- .card{
-     margin:5px;
-     color:white;
-   
- }
-
- p{
-     padding-left: 10px;
-   }
-
- /* Cards are stacked on top of each other at 768px or smaller */
- /* @media screen and (max-width: 768px) {
-  .card {
-    width: 100%;
+  searchSite{
+    /* width:65%; */
+    position: absolute;
   }
+header{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: black; 
+ }
+.mdl-layout__header{
+  background-color: white;
+  color: red;  
+}
+
+.mdl-layout__header-row{
+  background-color: white;
+ color:black;
+}
+.button1{
+  background-color: aqua;
+
+}
+main{
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  position: relative;
+  font-family: Arial;
+  margin: 0;
+}
+
+section img{
+ 
+  /* border-style: solid; */
+  /* border-width: 2px;
+  padding: 5px; */
+  /* flex: 0 0 300px; */
+  flex:1 1 auto;
+  /* margin:px; */
+  /* width:100%;
+  height:100%; */
+  
+  object-fit: cover;
+  vertical-align: bottom;
+  /* border-radius: 50px; */
+   /* min-width: 200px; 
+   max-height:300px;  */
+   /* height: fit-content; */
+   /* flex-grow: 1; */
+   /* width: auto; */
+  /* object-fit: cover;
+  object-position: left; */
+  margin: 1px;
+  /* box-shadow: 5px 5px 5px #AAAAAA; */
+}
+img:hover{
+ 
+      border-radius: 50px;
+      border: 1px solid grey;
+}
+section{
+  display:flex;
+  align-self: flex-start;
+  /* align-items: stretch; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* margin-top: 5%; */
+}
+.containerImages{
+  display:flex; 
+  flex-wrap:wrap;
+  margin-top: 1px;
+
+  margin-left:250px;
+  /* padding-left: 80px; */
+  /* justify-content:space-around; */
+  height:400px;
+  width:954px;
+  /* border:solid; */
+  /* padding:1px; */
+ 
+  /* border-color: orange; */
+ 
+}
+footer{
+  border:solid;
+  border-color: orange;
+  margin:5px;
+}
+
+/* .demo-card-image.mdl-card {
+  width: 256px;
+  height: 256px;
+  background-image: url(./assets/newyork.jpg);
+}
+.demo-card-image > .mdl-card__actions {
+  height: 52px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.2);
+}
+.demo-card-image__filename {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
 } */
 
-/* Cards are split into two columns at 992px or smaller */
-/* @media screen and (max-width: 992px) {
-    .card {
-      width: 50%;
-    }
-} */ 
+/* .wrapper{
+  position:absolute;
+  top:40%;
+  left:50%;
+  /* transform: translate(-50%,-50%); 
+  } 
+  */
+
+/*
+.searchbox{
+  position:relative;
+}
+  
+ .searchbox .input{
+   width:275px;
+   border:0;
+   height:75px;
+   padding:0px 35px;
+   border-radius: 50px;
+   box-shadow: 0 0 15px 1px #b6bbc0;
+   outline:none;
+   color: #42be11;
+   font-size: 24px;
+   font-weight: bold;
+   transition: all .5s linear;
+ } 
+
+.searchbtn{
+  position: absolute;
+  top:0;
+  right: -1px;
+  background:red;
+  width:75px;
+  height:75px;
+  border-radius:50%;
+  cursor:pointer;
+  transition: all .5s linear;
+
+}
+
+.searchbtn .fas{
+  position: absolute;
+  
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  color: #42be11;
+  font-size:22px;
+  transition:all .5s linear;
+}
+
+.search.bg-green{
+  background: #42be11;
+  transition: all .2s linear;
+}
+
+.searchbtn .fas.color-white{
+  color: #fff;
+  transition: all .2s linear;
+}
+.searchbox .input.active-width{
+  width:275px;
+
+
+} */
+
+
+* {
+  box-sizing: border-box;
+}
+
+/* Style the search field */
+form.wrapper input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+form.wrapper button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.wrapper button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.wrapper::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.center_text {
+  /*Adding properties on the text on image */
+  position: absolute;
+  bottom: 240px;
+  right: 600px;
+  color:black;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: serif;
+  font-style: italic;
+}
+.wrapper{
+  position: absolute;
+  bottom: 130px;
+  right: 700px;
+}
+.center_text2{
+  position: absolute;
+  bottom: 190px;
+  right: 700px;
+  color:black;
+  font-size: 25px;
+  font-family: serif;
+  font-style: italic;
+}
+
+.center_text3{
+  position: absolute;
+  bottom: 100px;
+  right: 705px;
+  color:black;
+  font-size: 20px;
+  font-family: serif;
+ 
+
+}
