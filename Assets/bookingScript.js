@@ -10,7 +10,9 @@ const hotelSettings = {
 	}
 };
 
-var city = "Austin";
+// var city = "Austin";
+
+function getCityInfo (city) {
 hotelSettings.url = "https://hotels4.p.rapidapi.com/locations/search?query=" + city + "&locale=en_US";
 
 $.ajax(hotelSettings).done(function (response) {
@@ -43,6 +45,8 @@ $.ajax(hotelSettings).done(function (response) {
 		hotelSettings.url = "https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id=" + hotel.id;
 
 		$.ajax(hotelSettings).done(function (response) {
+			$("#container_destinations").attr("class", "hide");
+
 			var hotelImages = response.hotelImages;
 
 			console.log(hotel.name);
@@ -64,6 +68,20 @@ $.ajax(hotelSettings).done(function (response) {
 			cardWrapper.append(card);
 
 			hotelSuggestions.append(cardWrapper);
+		})
+		.fail(function(failReason) {
+			console.log(failReason);
 		});
 	})
+})
+.fail(function(failReason) {
+	console.log(failReason);
 });
+}; // end of function
+
+$("#submitButton").on("click", function(event) {
+	event.preventDefault();
+    var city = $("#search").val();                                                      
+
+    getCityInfo(city);
+})
