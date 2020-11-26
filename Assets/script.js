@@ -93,9 +93,11 @@
         });
     }; // end of function
 
+
+// eventListener to getData for county entered
 $("#submitButton").on("click", function(event) {
     event.preventDefault();
-    var county = $("#inputCity").val();
+    var county = $("#inputCity").val();                                                      
     console.log(county);
     getData(county);
 });
