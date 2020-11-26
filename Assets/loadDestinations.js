@@ -1,4 +1,5 @@
 var containerImagesEl=$(".containerImages");
+
     var h2El=$("<h2>");
      $("#containerImages").append(h2El.text("Top Destination Places"));
         
