@@ -1,0 +1,49 @@
+/* CSS for the survey form */
+
+.survey body {
+    font-family: 'Anaheim';
+    font-size: 1.2em;
+    
+  }
+  .survey h1 {
+    font-size: 1.5em;
+    text-align: center;
+    text-transform: capitalize;
+  }
+  .survey div + div {
+     margin-top: 1em;
+    }
+#survey-form{
+    font-weight: 500;
+    text-align: center;
+    background-color: white;
+}
+#outside {
+    background-color: lightgoldenrodyellow;
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+  .survey form {
+    /* Just to center the form on the page */
+    margin: 0 auto;
+    width: 70%;
+    /* To see the limits of the form */
+    padding: 1em;
+    border: 1px solid #CCC;
+    border-radius: 1em; 
+  }
+
+
+  
+ /* CSS  for weather Dashboard */
+
+ #city{
+   /* position: absolute; */
+  width:20px;
+  height:30px;
+  padding: 5px;
+  margin: 5px; 
+  margin-top: 20px; 
+  color:white;
+  background-color:blue;
+  }
