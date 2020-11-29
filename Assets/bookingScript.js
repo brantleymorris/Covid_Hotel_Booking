@@ -40,6 +40,7 @@ $.ajax(hotelSettings).done(function (response) {
 	} else if(hotels.length >= 3) {
 		layoutSize = 4;
 	}
+
 	hotelSuggestions.empty();
 	hotels.forEach(function (hotel) {
 		hotelSettings.url = "https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id=" + hotel.id;
@@ -72,6 +73,34 @@ $.ajax(hotelSettings).done(function (response) {
 		.fail(function(failReason) {
 			console.log(failReason);
 		});
+	
+	var lon = // need to drill down
+	var lat = // need to drill down
+	var geoAPI = "XBCZUOECX4F5A1OWBDCJAALNMLNZHDXM";
+	
+	var geoidURL = "https://geodatasource-geodatasource-location-search-web-service-v1.p.rapidapi.com/city?key=" + geoAPI + "&lat=" + lat + "&lng=" + lon;
+	
+	$.ajax({
+		url: geoidURL,
+		method: "GET"
+	}).done(function (response) {
+		console.log(response);
+
+		var state = // drill down
+		var stateQueryURL = "https://api.covidtracking.com/v1/states/" + state + "/current.json";
+		$.ajax({
+			url: stateQueryURL,
+			method: "GET"
+		}).then(function(response) {
+			console.log(response);
+
+			var activeCases = response.positive;
+			console.log("Active cases: " + activeCases);
+			var newCases = response.positiveIncrease;
+		    console.log("New cases: " + newCases);
+		}); 
+	});
+	
 	})
 })
 .fail(function(failReason) {
