@@ -88,6 +88,7 @@ $.ajax(hotelSettings).done(function (response) {
 
 		var state = // drill down
 		var stateQueryURL = "https://api.covidtracking.com/v1/states/" + state + "/current.json";
+		
 		$.ajax({
 			url: stateQueryURL,
 			method: "GET"
