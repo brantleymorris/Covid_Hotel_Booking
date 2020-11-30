@@ -9,19 +9,19 @@ header img{
 
 
 #hotelWeatherCardContainer{
-  height:800px;
+  height:1000px;
   width:1450px;
   /* border:solid;
   border-color: red; */
   background-color: black;
 /* background-image:"Assets/images/containerimage1.jpg" ; */
 }
-/* #weatherCard{
+/*#weatherCard{
   height:200px;
   width:200px;
   border:solid;
   border-color: lightcoral;
-} */
+}*/
 
 /* styling suggested hotel cards */
 .demo-card-wide{
@@ -330,17 +330,20 @@ form.wrapper::after {
 
 /* styling weather card */
 #weatherCard{
- width:200px;
+ width:400px;
  height:200px;
  padding: 5px;
- margin: 0px; 
  color:white;
  background-color:black;
- 
+ margin-left: 400px;
+ margin-top: 10px;
  }
 
-
-
+#covid-data {
+  margin-left: 750px;
+  margin-top: -150px;
+  height: 300px;
+}
 /* .demo-card-event.mdl-card {
   width: 356px;
   height: 256px;

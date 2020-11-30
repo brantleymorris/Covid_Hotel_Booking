@@ -6,7 +6,7 @@ const hotelSettings = {
 	"crossDomain": true,
 	"method": "GET",
 	"headers": {
-		"x-rapidapi-key": "a94a55b6bbmsh2098aa9a74c64eap1cd01ejsn1958536b713c",
+		"x-rapidapi-key": "fe41d0e134msh55d2cd6373f32ccp1c3111jsn2291e5088ca3",
 		"x-rapidapi-host": "hotels4.p.rapidapi.com",
 	}
 };
@@ -26,7 +26,7 @@ $.ajax(hotelSettings).done(function (response) {
 		url: fccAPI,
 		method: "GET"
 	}).done(function (response) {
-		console.log(response);
+		$("#covid-data").empty();
 
 		var county = response.results[0].county_name
 		var state = response.results[0].state_name
@@ -97,11 +97,8 @@ $.ajax(hotelSettings).done(function (response) {
 			url: stateQueryURL,
 			method: "GET"
 		}).then(function(response) {
-			console.log(response);
 
 			var activeCases = response.positive;
-			var newCases = response.positiveIncrease;
-			var stateDeath = response.death;
 
 			var countyQueryURL = "https://corona.lmao.ninja/v3/covid-19/jhucsse/counties/" + county;
 
@@ -109,10 +106,8 @@ $.ajax(hotelSettings).done(function (response) {
 				url: countyQueryURL,
 				method: "GET"
 			}).then(function(response) {
-				console.log(response);
 
 				var confirmedCases = response[0].stats.confirmed;
-				var countyDeath = response[0].stats.deaths;
 
 				var covidTarget = $("#covid-data");
 				var covidCard = $("<div>").attr("class", "mdl-card mdl-card--border");
@@ -127,20 +122,17 @@ $.ajax(hotelSettings).done(function (response) {
 				var covidCountyTitle = $("<div>").attr("class", "mdl-card__title");
 				var covidCountyTitleText = $("<h4>").attr("class", "mdl-card__title-text").text(county + " county data:");
 				var countyActive = $("<body>").attr("class", "mdl-card__supporting-text").text("Confirmed cases: " + confirmedCases);
-				var countyDeaths = $("<body>").attr("class", "mdl-card__supporting-text").text("Deaths: " + countyDeath);
 		
 				var covidStateData = $("<div>").attr("class", "mdl-cell mdl-cell--6-col mdl-shadow--4dp");
 				var covidStateTitle = $("<div>").attr("class", "mdl-card__title");
 				var covidStateTitleText = $("<h4>").attr("class", "mdl-card__title-text").text(state + " data")
 				var stateActive = $("<body>").attr("class", "mdl-card__supporting-text").text("Active cases: " + activeCases);
-				var stateIncrease = $("<body>").attr("class", "mdl-card__supporting-text").text("New cases: " + newCases);
-				var stateDeaths = $("<body>").attr("class", "mdl-card__supporting-text").text("Deaths: " + stateDeath);
 
 				covidCountyTitle.append(covidCountyTitleText);
-				covidCountyData.append(covidCountyTitle, countyActive, countyDeaths);
+				covidCountyData.append(covidCountyTitle, countyActive);
 
 				covidStateTitle.append(covidStateTitleText);
-				covidStateData.append(covidStateTitle, stateActive, stateIncrease); 
+				covidStateData.append(covidStateTitle, stateActive); 
 		
 				covidData.append(covidCountyData, covidStateData);
 				covidGrid.append(covidData);
