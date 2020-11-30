@@ -1,16 +1,51 @@
+header img{
+  width:70px;
+  height:70px;
+  margin-left: 40px;
+  margin-top: 14px;
+  
+}
+
+
+
+#hotelWeatherCardContainer{
+  height:800px;
+  width:1450px;
+  /* border:solid;
+  border-color: red; */
+  background-color: black;
+/* background-image:"Assets/images/containerimage1.jpg" ; */
+}
+/* #weatherCard{
+  height:200px;
+  width:200px;
+  border:solid;
+  border-color: lightcoral;
+} */
+
+/* styling suggested hotel cards */
+.demo-card-wide{
+  height:500px;
+  border:solid;
+  border-color:lightblue;
+  font-weight: bold;
+}
 
 .demo-card-wide.mdl-card {
-  width: 512px;
+  width: 400px;
 
 }
 .demo-card-wide > .mdl-card__title {
-  color: #fff;
+  color:white;
   height: 176px;
   background: url('https://exp.cdn-hotels.com/hotels/1000000/10000/8800/8737/2ac8a84b_y.jpg') center / cover;
 }
 .demo-card-wide > .mdl-card__menu {
-  color: #fff;
+  color: black;
+  font-weight: bold;
+  
 }
+
 
 
 
@@ -42,20 +77,26 @@
 header{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: black; 
+  
+  
  }
-.mdl-layout__header{
-  background-color: white;
-  color: red;  
-}
 
 .mdl-layout__header-row{
   background-color: white;
  color:black;
+ background-color: lightgrey;
 }
 .button1{
   background-color: aqua;
 
 }
+
+.mdl-layout__tab{
+  margin-top: 40px;
+  font-size: 20px;
+  color: white;
+}
+
 main{
 
   display: flex;
@@ -106,7 +147,7 @@ section{
 .containerImages{
   display:flex; 
   flex-wrap:wrap;
-  margin-top: 1px;
+  /* margin-top: 1px; */
 
   margin-left:250px;
   /* padding-left: 80px; */
@@ -285,4 +326,40 @@ form.wrapper::after {
   font-family: serif;
  
 
+}
+
+/* styling weather card */
+.demo-card-event.mdl-card {
+  width: 356px;
+  height: 256px;
+  background: #3E4EB8;
+  margin-left: 30px;
+  border:solid;
+  border-color: red;
+}
+.demo-card-event > .mdl-card__actions {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.demo-card-event > .mdl-card__title {
+  align-items: flex-start;
+ 
+}
+.demo-card-event > .mdl-card__title > h4 {
+  margin-top: 5;
+}
+.demo-card-event > .mdl-card__actions {
+  display: flex;
+  box-sizing:border-box;
+  align-items: center;
+  border:solid;
+  border-color:red;
+  
+}
+.demo-card-event > .mdl-card__actions > .material-icons {
+  padding-right: 10px;
+}
+.demo-card-event > .mdl-card__title,
+.demo-card-event > .mdl-card__actions,
+.demo-card-event > .mdl-card__actions > .mdl-button {
+  color: #fff;
 }

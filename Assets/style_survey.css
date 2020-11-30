@@ -9,6 +9,7 @@
     font-size: 1.5em;
     text-align: center;
     text-transform: capitalize;
+    margin-top: 4px;
   }
   .survey div + div {
      margin-top: 1em;
@@ -29,16 +30,31 @@
     width: 70%;
     /* To see the limits of the form */
     padding: 1em;
+    text-transform: capitalize;
     border: 1px solid #CCC;
     border-radius: 1em; 
   }
+#email_label ,#age_label,#name_label,#student_label{
+  width:300px;
+  height:25px;
+}
 
+#Definately{
+  margin-left: 35px;
+}
+#May_be{
+  margin-left: 20px;
+}
+#Not_sure{
+  margin-left: 28px;
+}
 
   
  /* CSS  for weather Dashboard */
 
  #city{
    /* position: absolute; */
+   margin-left: 200px;
   width:20px;
   height:30px;
   padding: 5px;
@@ -46,4 +62,6 @@
   margin-top: 20px; 
   color:white;
   background-color:blue;
+  
   }
+
