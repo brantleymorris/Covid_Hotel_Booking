@@ -139,7 +139,7 @@ $.ajax(hotelSettings).done(function (response) {
 				covidCountyData.append(covidCountyTitle, countyActive, countyDeaths);
 
 				covidStateTitle.append(covidStateTitleText);
-				covidStateData.append(covidStateTitle, stateActive, stateIncrease); 
+				covidStateData.append(covidStateTitle, stateActive, stateIncrease, stateDeaths); 
 		
 				covidData.append(covidCountyData, covidStateData);
 				covidGrid.append(covidData);
