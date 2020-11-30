@@ -1,11 +1,12 @@
 var hotelSuggestions = $("#suggested-hotels");
-
+$("#hotelWeatherCardContainer").append(hotelSuggestions);
+$("#hotelWeatherCardContainer").attr("class","hide");
 const hotelSettings = {
 	"async": true,
 	"crossDomain": true,
 	"method": "GET",
 	"headers": {
-		"x-rapidapi-key": "a94a55b6bbmsh2098aa9a74c64eap1cd01ejsn1958536b713c",
+		"x-rapidapi-key": "fe41d0e134msh55d2cd6373f32ccp1c3111jsn2291e5088ca3",
 		"x-rapidapi-host": "hotels4.p.rapidapi.com",
 	}
 };
@@ -25,7 +26,7 @@ $.ajax(hotelSettings).done(function (response) {
 		url: fccAPI,
 		method: "GET"
 	}).done(function (response) {
-		console.log(response);
+		$("#covid-data").empty();
 
 		var county = response.results[0].county_name
 		var state = response.results[0].state_name
@@ -96,11 +97,8 @@ $.ajax(hotelSettings).done(function (response) {
 			url: stateQueryURL,
 			method: "GET"
 		}).then(function(response) {
-			console.log(response);
 
 			var activeCases = response.positive;
-			var newCases = response.positiveIncrease;
-			var stateDeath = response.death;
 
 			var countyQueryURL = "https://corona.lmao.ninja/v3/covid-19/jhucsse/counties/" + county;
 
@@ -108,10 +106,8 @@ $.ajax(hotelSettings).done(function (response) {
 				url: countyQueryURL,
 				method: "GET"
 			}).then(function(response) {
-				console.log(response);
 
 				var confirmedCases = response[0].stats.confirmed;
-				var countyDeath = response[0].stats.deaths;
 
 				var covidTarget = $("#covid-data");
 				var covidCard = $("<div>").attr("class", "mdl-card mdl-card--border");
@@ -126,20 +122,17 @@ $.ajax(hotelSettings).done(function (response) {
 				var covidCountyTitle = $("<div>").attr("class", "mdl-card__title");
 				var covidCountyTitleText = $("<h4>").attr("class", "mdl-card__title-text").text(county + " county data:");
 				var countyActive = $("<body>").attr("class", "mdl-card__supporting-text").text("Confirmed cases: " + confirmedCases);
-				var countyDeaths = $("<body>").attr("class", "mdl-card__supporting-text").text("Deaths: " + countyDeath);
 		
 				var covidStateData = $("<div>").attr("class", "mdl-cell mdl-cell--6-col mdl-shadow--4dp");
 				var covidStateTitle = $("<div>").attr("class", "mdl-card__title");
 				var covidStateTitleText = $("<h4>").attr("class", "mdl-card__title-text").text(state + " data")
 				var stateActive = $("<body>").attr("class", "mdl-card__supporting-text").text("Active cases: " + activeCases);
-				var stateIncrease = $("<body>").attr("class", "mdl-card__supporting-text").text("New cases: " + newCases);
-				var stateDeaths = $("<body>").attr("class", "mdl-card__supporting-text").text("Deaths: " + stateDeath);
 
 				covidCountyTitle.append(covidCountyTitleText);
-				covidCountyData.append(covidCountyTitle, countyActive, countyDeaths);
+				covidCountyData.append(covidCountyTitle, countyActive);
 
 				covidStateTitle.append(covidStateTitleText);
-				covidStateData.append(covidStateTitle, stateActive, stateIncrease, stateDeaths); 
+				covidStateData.append(covidStateTitle, stateActive); 
 		
 				covidData.append(covidCountyData, covidStateData);
 				covidGrid.append(covidData);
@@ -179,14 +172,14 @@ $.ajax(hotelSettings).done(function (response) {
 		hotelSettings.url = "https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id=" + hotel.id;
 
 		$.ajax(hotelSettings).done(function (response) {
+           
 			$("#container_destinations").attr("class", "hide");
-			
+ 
+			$("#hotelWeatherCardContainer").removeClass("hide");
 			var hotelImages = response.hotelImages;
 
 			console.log(hotel.name);
 			var hotelImage = hotelImages[0].baseUrl.replace("{size}", "z");
-
-		
 			var cardWrapper = $("<div>").attr("class", "mdl-cell mdl-cell--" + layoutSize + "-col");
 			var card = $("<div>").attr("class", "demo-card-wide mdl-card mdl-shadow--2dp");
 
@@ -195,23 +188,42 @@ $.ajax(hotelSettings).done(function (response) {
 			
 			var title = $("<h2>").attr("class", "mdl-card__title-text").text(hotel.name);
 			titleWrapper.append(title);
+            card.append(titleWrapper);
+			hotelSettings.url = "https://hotels4.p.rapidapi.com/properties/get-details?locale=en_US&currency=USD&checkOut=2020-01-15&adults1=1&checkIn=2020-01-08&id=" + hotel.id;
 
-			var caption = $("<div>").attr("class", "mdl-card__supporting-text").text("Lorem ipsum dolor sit amet");
+		$.ajax(hotelSettings).done(function (response) {
+			console.log(response.data);
+		// var arrayLength=response.data.body.amenities[0].listItems[3].listItems.length;
+		// console.log(arrayLength);
+    //   data.overview.overviewSections[0].content[0];
+	for(var i=0;i<6;i++){
+		var hotelDetails=(`* ${response.data.body.amenities[0].listItems[0].listItems[i]}`);
+// var hotelDetails=JSON.stringify(response.data.body.amenities[0].listItems[i]);
+	// response.data.body.amenities[0].listItems[0].listItem[i]
 
-			card.append(titleWrapper, caption);
+			var caption = $("<div>").attr("class", "mdl-card__supporting-text").text(hotelDetails);
+			
+			card.append(caption);
 			cardWrapper.append(card);
 
 			hotelSuggestions.append(cardWrapper);
+		
+	}
+			
 		})
-		.fail(function(failReason) {
+
+		}).fail(function(failReason) {
 			console.log(failReason);
 		});
+		
+		
 	})
 })
 .fail(function(failReason) {
 	console.log(failReason);
 });
 };
+
 
 $("#submitButton").on("click", function(event) {
 	event.preventDefault();
