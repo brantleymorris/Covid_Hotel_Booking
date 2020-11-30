@@ -110,18 +110,19 @@ mdl-layout--fixed-tabs">
       <div id="outside">
         <form id="survey-form">
           <h1 id="title">Survey Form</h1>
-          <p id="description">Let us know how can we improve</p>
+          <form role="form" onsubmit="signUp(event);"></form>
+          <p id="description" class=>Let us know how can we improve</p>
           <div>
             <label for="name_label"> Name</label>
-            <input type="text" id="name_label" name="user_name" placeholder="Enter name here"></div>
+            <input class="text" type="text" id="name_label" name="user_name" placeholder="Enter name here"></div>
           <div>
             <label for="email_label">Email</label>
-            <input type="email" id="email_label" name="email" placeholder="Enter adress here">
+            <input class ="text" type="email" id="email_label" name="email" placeholder="Enter adress here">
 
           </div>
           <div>
             <label for="age_label">Age</label>
-            <input list="Age" placeholder="Enter age here">
+            <input class="text" list="Age" placeholder="Enter age here">
 
             <datalist id="Age">
 
@@ -137,7 +138,8 @@ mdl-layout--fixed-tabs">
             </datalist>
           </div>
           <div>
-            <label for="student_label">How was your experience with us?</label>
+            <label for ="student_label" class="text">How was your experience with us?</label>
+            
             <input list="role">
             <datalist id="role">
               <optiom value="Excellent">
@@ -160,9 +162,9 @@ mdl-layout--fixed-tabs">
             <label for="May_be"> May Be</label><br>
             <input type="radio" id="Not_sure" name="recommend" value="Not sure">
             <label for="Not_sure"> Not sure</label>
-
           </div>
-
+            <button class="button">Save</button>
+          </form>
         </form>
       </div>
 

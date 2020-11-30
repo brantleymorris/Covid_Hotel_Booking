@@ -5,7 +5,7 @@ const hotelSettings = {
 	"crossDomain": true,
 	"method": "GET",
 	"headers": {
-		"x-rapidapi-key": "d1b2086cbfmshc413b7cedb10ce8p18aa2ajsn8809ec199a93",
+		"x-rapidapi-key": "a94a55b6bbmsh2098aa9a74c64eap1cd01ejsn1958536b713c",
 		"x-rapidapi-host": "hotels4.p.rapidapi.com",
 	}
 };

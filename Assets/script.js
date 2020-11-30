@@ -1,4 +1,6 @@
 
+ 
+
     // gets data for the searched county
     function getData(county) {
 
