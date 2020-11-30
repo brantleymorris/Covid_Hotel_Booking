@@ -48,8 +48,8 @@ $.ajax(hotelSettings).done(function (response) {
 		$.ajax(hotelSettings).done(function (response) {
            
 			$("#container_destinations").attr("class", "hide");
+ 
 			$("#hotelWeatherCardContainer").removeClass("hide");
-
 			var hotelImages = response.hotelImages;
 
 			console.log(hotel.name);
