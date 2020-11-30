@@ -11,13 +11,146 @@ const hotelSettings = {
 	}
 };
 
-// var city = "Austin";
-
 function getCityInfo (city) {
 hotelSettings.url = "https://hotels4.p.rapidapi.com/locations/search?query=" + city + "&locale=en_US";
 
 $.ajax(hotelSettings).done(function (response) {
+	console.log(response);
 	var suggestions = response.suggestions;
+
+	var lon = response.suggestions[0].entities[0].longitude;
+	var lat = response.suggestions[0].entities[0].latitude;
+	var fccAPI = "https://geo.fcc.gov/api/census/area?lat=" + lat + "&lon=" + lon + "&format=json";
+
+	$.ajax({
+		url: fccAPI,
+		method: "GET"
+	}).done(function (response) {
+		console.log(response);
+
+		var county = response.results[0].county_name
+		var state = response.results[0].state_name
+
+		var stateParsed = "Blank";
+		var states = [
+			{name: "Alabama", code: "al"},
+			{name: "Alaska", code: "ak"},
+			{name: "Arizona", code: "az"},
+			{name: "California", code: "ca"},
+			{name: "Colorado", code: "co"},
+			{name: "Connecticut", code: "ct"},
+			{name: "Delaware", code: "de"},
+			{name: "Florida", code: "fl"},
+			{name: "Georgia", code: "ga"},
+			{name: "Hawaii", code: "hi"},
+			{name: "Idaho", code: "id"},
+			{name: "Illinois", code: "il"},
+			{name: "Indiana", code: "in"},
+			{name: "Iowa", code: "ia"},
+			{name: "Kansas", code: "ks"},
+			{name: "Kentucky", code: "ky"},
+			{name: "Louisiana", code: "la"},
+			{name: "Maine", code: "me"},
+			{name: "Maryland", code: "md"},
+			{name: "Massachusetts", code: "ma"},
+			{name: "Michigan", code: "mi"},
+			{name: "Minnesota", code: "mn"},
+			{name: "Mississippi", code:"ms" },
+			{name: "Missouri", code: "mo"},
+			{name: "Montana", code: "mt"},
+			{name: "Nebraska", code: "ne"},
+			{name: "Nevada", code: "nv"},
+			{name: "New Hampshire", code: "nh"},
+			{name: "New Jersey", code: "nj"},
+			{name: "New Mexico", code: "nm"},
+			{name: "New York", code: "ny"},
+			{name: "North Carolina", code: "nc"},
+			{name: "North Dakota", code: "nd"},
+			{name: "Ohio", code: "oh"},
+			{name: "Oklahoma", code: "ok"},
+			{name: "Oregon", code: "or"},
+			{name: "Pennsylvania", code: "pa"},
+			{name: "Rhode Island", code: "ri"},
+			{name: "South Carolina", code: "sc"},
+			{name: "South Dakota", code: "sd"},
+			{name: "Tennessee", code: "tn"},
+			{name: "Texas", code: "tx"},
+			{name: "Utah", code: "ut"},
+			{name: "Vermont", code: "vt"},
+			{name: "Virginia", code: "va"},
+			{name: "Washington", code: "wa"},
+			{name: "West Virginia", code: "wv"},
+			{name: "Wisconsin", code: "wi"},
+			{name: "Wyoming", code: "wy"}
+		];
+
+		for (let i = 0; i < states.length; i ++) {
+			if ( states[i].name === state) {
+				stateParsed = states[i].code
+				console.log(stateParsed);
+			}
+		}
+
+		var stateQueryURL = "https://api.covidtracking.com/v1/states/" + stateParsed + "/current.json";
+
+		$.ajax({
+			url: stateQueryURL,
+			method: "GET"
+		}).then(function(response) {
+			console.log(response);
+
+			var activeCases = response.positive;
+			var newCases = response.positiveIncrease;
+			var stateDeath = response.death;
+
+			var countyQueryURL = "https://corona.lmao.ninja/v3/covid-19/jhucsse/counties/" + county;
+
+			$.ajax({
+				url: countyQueryURL,
+				method: "GET"
+			}).then(function(response) {
+				console.log(response);
+
+				var confirmedCases = response[0].stats.confirmed;
+				var countyDeath = response[0].stats.deaths;
+
+				var covidTarget = $("#covid-data");
+				var covidCard = $("<div>").attr("class", "mdl-card mdl-card--border");
+
+				var covidTitleDiv = $("<div>").attr("class", "mdl-card__title mdl-shadow--4dp");
+				var covidTitle = $("<h1>").attr("class", "mdl-card__title-text").text("Covid Data");
+					
+				var covidGrid = $("<div>").attr("class", "mdl-layout mdl-js-layout");
+				var covidData = $("<div>").attr("class", "mdl-grid");
+
+				var covidCountyData = $("<div>").attr("class", "mdl-cell mdl-cell--6-col mdl-shadow--4dp");
+				var covidCountyTitle = $("<div>").attr("class", "mdl-card__title");
+				var covidCountyTitleText = $("<h4>").attr("class", "mdl-card__title-text").text(county + " county data:");
+				var countyActive = $("<body>").attr("class", "mdl-card__supporting-text").text("Confirmed cases: " + confirmedCases);
+				var countyDeaths = $("<body>").attr("class", "mdl-card__supporting-text").text("Deaths: " + countyDeath);
+		
+				var covidStateData = $("<div>").attr("class", "mdl-cell mdl-cell--6-col mdl-shadow--4dp");
+				var covidStateTitle = $("<div>").attr("class", "mdl-card__title");
+				var covidStateTitleText = $("<h4>").attr("class", "mdl-card__title-text").text(state + " data")
+				var stateActive = $("<body>").attr("class", "mdl-card__supporting-text").text("Active cases: " + activeCases);
+				var stateIncrease = $("<body>").attr("class", "mdl-card__supporting-text").text("New cases: " + newCases);
+				var stateDeaths = $("<body>").attr("class", "mdl-card__supporting-text").text("Deaths: " + stateDeath);
+
+				covidCountyTitle.append(covidCountyTitleText);
+				covidCountyData.append(covidCountyTitle, countyActive, countyDeaths);
+
+				covidStateTitle.append(covidStateTitleText);
+				covidStateData.append(covidStateTitle, stateActive, stateIncrease); 
+		
+				covidData.append(covidCountyData, covidStateData);
+				covidGrid.append(covidData);
+					
+				covidTitleDiv.append(covidTitle);
+				covidCard.append(covidTitleDiv, covidGrid)
+				covidTarget.append(covidCard);
+			});
+		});
+	});
 
 	var hotelGroups = suggestions.find(function (element) {
 		return element.group === "HOTEL_GROUP"
@@ -41,6 +174,7 @@ $.ajax(hotelSettings).done(function (response) {
 	} else if(hotels.length >= 3) {
 		layoutSize = 4;
 	}
+
 	hotelSuggestions.empty();
 	hotels.forEach(function (hotel) {
 		hotelSettings.url = "https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id=" + hotel.id;
@@ -96,7 +230,7 @@ $.ajax(hotelSettings).done(function (response) {
 .fail(function(failReason) {
 	console.log(failReason);
 });
-}; // end of function
+};
 
 
 $("#submitButton").on("click", function(event) {
@@ -105,3 +239,4 @@ $("#submitButton").on("click", function(event) {
 
     getCityInfo(city);
 })
+

@@ -95,6 +95,7 @@
         });
     }; // end of function
 
+getData("Travis");
 
 // eventListener to getData for county entered
 $("#submitButton").on("click", function(event) {
