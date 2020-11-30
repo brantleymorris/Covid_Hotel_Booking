@@ -110,6 +110,23 @@ mdl-layout--fixed-tabs">
 
     <div class="survey">
       <div id="outside">
+
+        <form id="survey-form">
+          <h1 id="title">Survey Form</h1>
+          <form role="form" onsubmit="signUp(event);"></form>
+          <p id="description" class=>Let us know how can we improve</p>
+          <div>
+            <label for="name_label"> Name</label>
+            <input class="text" type="text" id="name_label" name="user_name" placeholder="Enter name here"></div>
+          <div>
+            <label for="email_label">Email</label>
+            <input class ="text" type="email" id="email_label" name="email" placeholder="Enter adress here">
+
+          </div>
+          <div>
+            <label for="age_label">Age</label>
+            <input class="text" list="Age" placeholder="Enter age here">
+
      <form id="survey-form">
          <u> <h1 id="title">Survey Form</h1></u>
           <i><p id="description">Let us know how can we improve..</p></i>
@@ -125,6 +142,7 @@ mdl-layout--fixed-tabs">
             <label for="age_label">Age</label><br/>
             <input list="Age" id="age_label" placeholder="Your age...">
 
+
             <datalist id="Age">
 
 
@@ -139,8 +157,14 @@ mdl-layout--fixed-tabs">
             </datalist>
           </div>
           <div>
+
+            <label for ="student_label" class="text">How was your experience with us?</label>
+            
+            <input list="role">
+
             <label for="student_label">How was your experience with us?</label><br/>
             <input list="role" id="student_label">
+
             <datalist id="role">
               <optiom value="Excellent">
                 <option value="Very Good">
@@ -162,9 +186,9 @@ mdl-layout--fixed-tabs">
             <label for="May_be"> May Be</label><br/>
             <input type="radio" id="Not_sure" name="recommend" value="Not sure">
             <label for="Not_sure"> Not sure</label>
-
           </div>
-
+            <button class="button">Save</button>
+          </form>
         </form>
       </div>
 
