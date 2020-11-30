@@ -10,74 +10,15 @@ const hotelSettings = {
 	}
 };
 
-// var city = "Austin";
-
 function getCityInfo (city) {
 hotelSettings.url = "https://hotels4.p.rapidapi.com/locations/search?query=" + city + "&locale=en_US";
 
 $.ajax(hotelSettings).done(function (response) {
 	console.log(response);
 	var suggestions = response.suggestions;
+
 	var lon = response.suggestions[0].entities[0].longitude;
 	var lat = response.suggestions[0].entities[0].latitude;
-
-	var hotelGroups = suggestions.find(function (element) {
-		return element.group === "HOTEL_GROUP"
-	});
-
-	if (hotelGroups && hotelGroups.entities.length === 0) return;
-
-	var hotels = hotelGroups.entities.map(function (element) {
-		return {
-			caption: element.caption,
-			name: element.name,
-			id: element.destinationId
-		}
-	});
-
-	// Determine layout size by number of hotels
-	var layoutSize = 12;
-
-	if(hotels.length == 2) {
-		layoutSize = 6;
-	} else if(hotels.length >= 3) {
-		layoutSize = 4;
-	}
-
-	hotelSuggestions.empty();
-	hotels.forEach(function (hotel) {
-		hotelSettings.url = "https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id=" + hotel.id;
-
-		$.ajax(hotelSettings).done(function (response) {
-			$("#container_destinations").attr("class", "hide");
-			
-			var hotelImages = response.hotelImages;
-
-			console.log(hotel.name);
-			var hotelImage = hotelImages[0].baseUrl.replace("{size}", "z");
-
-		
-			var cardWrapper = $("<div>").attr("class", "mdl-cell mdl-cell--" + layoutSize + "-col");
-			var card = $("<div>").attr("class", "demo-card-wide mdl-card mdl-shadow--2dp");
-
-			var titleWrapper = $("<div>").attr("class", "mdl-card__title").css("background-image", "url(" + hotelImage + ")");
-
-			
-			var title = $("<h2>").attr("class", "mdl-card__title-text").text(hotel.name);
-			titleWrapper.append(title);
-
-			var caption = $("<div>").attr("class", "mdl-card__supporting-text").text("Lorem ipsum dolor sit amet");
-
-			card.append(titleWrapper, caption);
-			cardWrapper.append(card);
-
-			hotelSuggestions.append(cardWrapper);
-		})
-		.fail(function(failReason) {
-			console.log(failReason);
-		});
-	
-	// covid and location api here
 	var fccAPI = "https://geo.fcc.gov/api/census/area?lat=" + lat + "&lon=" + lon + "&format=json";
 
 	$.ajax({
@@ -150,7 +91,7 @@ $.ajax(hotelSettings).done(function (response) {
 		}
 
 		var stateQueryURL = "https://api.covidtracking.com/v1/states/" + stateParsed + "/current.json";
-// this is running 3x?, may need to move up
+
 		$.ajax({
 			url: stateQueryURL,
 			method: "GET"
@@ -158,9 +99,8 @@ $.ajax(hotelSettings).done(function (response) {
 			console.log(response);
 
 			var activeCases = response.positive;
-			console.log("Active cases: " + activeCases);
 			var newCases = response.positiveIncrease;
-			console.log("New cases: " + newCases);
+			var stateDeath = response.death;
 
 			var countyQueryURL = "https://corona.lmao.ninja/v3/covid-19/jhucsse/counties/" + county;
 
@@ -171,46 +111,107 @@ $.ajax(hotelSettings).done(function (response) {
 				console.log(response);
 
 				var confirmedCases = response[0].stats.confirmed;
+				var countyDeath = response[0].stats.deaths;
 
-				var covidCard = $("#covid-data");
+				var covidTarget = $("#covid-data");
+				var covidCard = $("<div>").attr("class", "mdl-card mdl-card--border");
 
-				var covidTitleDiv = $("<div>").attr("class", "mdl-card__title");
-				var covidTitle = $("<h2>").attr("class", "mdl-card__title-text").text("Covid Data");
+				var covidTitleDiv = $("<div>").attr("class", "mdl-card__title mdl-shadow--4dp");
+				var covidTitle = $("<h1>").attr("class", "mdl-card__title-text").text("Covid Data");
 					
-				var covidGrid = $("<div>").attr("class", "mdl-grid");
-				var covidData = $("<div>").attr("class", "mdl-cell mdl-cell--6-col");
+				var covidGrid = $("<div>").attr("class", "mdl-layout mdl-js-layout");
+				var covidData = $("<div>").attr("class", "mdl-grid");
 
-				var covidCountyData = $("<div>").attr("class", "mdl-card");
+				var covidCountyData = $("<div>").attr("class", "mdl-cell mdl-cell--6-col mdl-shadow--4dp");
 				var covidCountyTitle = $("<div>").attr("class", "mdl-card__title");
 				var covidCountyTitleText = $("<h4>").attr("class", "mdl-card__title-text").text(county + " county data:");
 				var countyActive = $("<body>").attr("class", "mdl-card__supporting-text").text("Confirmed cases: " + confirmedCases);
+				var countyDeaths = $("<body>").attr("class", "mdl-card__supporting-text").text("Deaths: " + countyDeath);
 		
-				var covidStateData = $("<div>").attr("class", "mdl-card");
+				var covidStateData = $("<div>").attr("class", "mdl-cell mdl-cell--6-col mdl-shadow--4dp");
 				var covidStateTitle = $("<div>").attr("class", "mdl-card__title");
 				var covidStateTitleText = $("<h4>").attr("class", "mdl-card__title-text").text(state + " data")
 				var stateActive = $("<body>").attr("class", "mdl-card__supporting-text").text("Active cases: " + activeCases);
-					
+				var stateIncrease = $("<body>").attr("class", "mdl-card__supporting-text").text("New cases: " + newCases);
+				var stateDeaths = $("<body>").attr("class", "mdl-card__supporting-text").text("Deaths: " + stateDeath);
+
 				covidCountyTitle.append(covidCountyTitleText);
-				covidCountyData.append(covidCountyTitle, countyActive);
+				covidCountyData.append(covidCountyTitle, countyActive, countyDeaths);
 
 				covidStateTitle.append(covidStateTitleText);
-				covidStateData.append(covidStateTitle, stateActive); 
+				covidStateData.append(covidStateTitle, stateActive, stateIncrease); 
 		
 				covidData.append(covidCountyData, covidStateData);
 				covidGrid.append(covidData);
 					
 				covidTitleDiv.append(covidTitle);
-				covidCard.append(covidTitleDiv, covidGrid);
+				covidCard.append(covidTitleDiv, covidGrid)
+				covidTarget.append(covidCard);
 			});
 		});
-	}); // end of covid and location api
-	
+	});
+
+	var hotelGroups = suggestions.find(function (element) {
+		return element.group === "HOTEL_GROUP"
+	});
+
+	if (hotelGroups && hotelGroups.entities.length === 0) return;
+
+	var hotels = hotelGroups.entities.map(function (element) {
+		return {
+			caption: element.caption,
+			name: element.name,
+			id: element.destinationId
+		}
+	});
+
+	// Determine layout size by number of hotels
+	var layoutSize = 12;
+
+	if(hotels.length == 2) {
+		layoutSize = 6;
+	} else if(hotels.length >= 3) {
+		layoutSize = 4;
+	}
+
+	hotelSuggestions.empty();
+	hotels.forEach(function (hotel) {
+		hotelSettings.url = "https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id=" + hotel.id;
+
+		$.ajax(hotelSettings).done(function (response) {
+			$("#container_destinations").attr("class", "hide");
+			
+			var hotelImages = response.hotelImages;
+
+			console.log(hotel.name);
+			var hotelImage = hotelImages[0].baseUrl.replace("{size}", "z");
+
+		
+			var cardWrapper = $("<div>").attr("class", "mdl-cell mdl-cell--" + layoutSize + "-col");
+			var card = $("<div>").attr("class", "demo-card-wide mdl-card mdl-shadow--2dp");
+
+			var titleWrapper = $("<div>").attr("class", "mdl-card__title").css("background-image", "url(" + hotelImage + ")");
+
+			
+			var title = $("<h2>").attr("class", "mdl-card__title-text").text(hotel.name);
+			titleWrapper.append(title);
+
+			var caption = $("<div>").attr("class", "mdl-card__supporting-text").text("Lorem ipsum dolor sit amet");
+
+			card.append(titleWrapper, caption);
+			cardWrapper.append(card);
+
+			hotelSuggestions.append(cardWrapper);
+		})
+		.fail(function(failReason) {
+			console.log(failReason);
+		});
 	})
 })
 .fail(function(failReason) {
 	console.log(failReason);
 });
-}; // end of function
+};
 
 $("#submitButton").on("click", function(event) {
 	event.preventDefault();
