@@ -329,7 +329,19 @@ form.wrapper::after {
 }
 
 /* styling weather card */
-.demo-card-event.mdl-card {
+#weatherCard{
+ width:200px;
+ height:200px;
+ padding: 5px;
+ margin: 0px; 
+ color:white;
+ background-color:black;
+ 
+ }
+
+
+
+/* .demo-card-event.mdl-card {
   width: 356px;
   height: 256px;
   background: #3E4EB8;
@@ -362,4 +374,4 @@ form.wrapper::after {
 .demo-card-event > .mdl-card__actions,
 .demo-card-event > .mdl-card__actions > .mdl-button {
   color: #fff;
-}
+} */

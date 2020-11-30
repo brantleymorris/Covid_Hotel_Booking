@@ -41,10 +41,6 @@ $.ajax(hotelSettings).done(function (response) {
 	} else if(hotels.length >= 3) {
 		layoutSize = 4;
 	}
-	 
-
-
-   
 	hotelSuggestions.empty();
 	hotels.forEach(function (hotel) {
 		hotelSettings.url = "https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id=" + hotel.id;
@@ -58,8 +54,6 @@ $.ajax(hotelSettings).done(function (response) {
 
 			console.log(hotel.name);
 			var hotelImage = hotelImages[0].baseUrl.replace("{size}", "z");
-
-		
 			var cardWrapper = $("<div>").attr("class", "mdl-cell mdl-cell--" + layoutSize + "-col");
 			var card = $("<div>").attr("class", "demo-card-wide mdl-card mdl-shadow--2dp");
 
@@ -67,12 +61,8 @@ $.ajax(hotelSettings).done(function (response) {
 
 			
 			var title = $("<h2>").attr("class", "mdl-card__title-text").text(hotel.name);
-
 			titleWrapper.append(title);
             card.append(titleWrapper);
-
-
-		
 			hotelSettings.url = "https://hotels4.p.rapidapi.com/properties/get-details?locale=en_US&currency=USD&checkOut=2020-01-15&adults1=1&checkIn=2020-01-08&id=" + hotel.id;
 
 		$.ajax(hotelSettings).done(function (response) {
