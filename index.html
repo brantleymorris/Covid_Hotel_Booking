@@ -20,25 +20,30 @@ mdl-layout--fixed-tabs">
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
         <!-- Title -->
-        <span class="mdl-layout-title"> </span>
-        <h3> <i>Book your Trip</i></h3>
+        <span class="mdl-layout-title">
+          
+           </span>
+      <!-- <h3> <i class="fa fa-etsy" aria-hidden="true"></i>asy <i class="fa fa-h-square" aria-hidden="true"></i>otel Booking </h3> -->
+
       </div>
       <!-- Tabs -->
       <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+        <img src="Assets/images/king_logo.png" alt="">
         <a href="#fixed-tab-1" class="mdl-layout__tab is-active"><i class="fa fa-fw fa-home"></i> HOME</a>
-        <a href="#fixed-tab-2" class="mdl-layout__tab">Gallery</a>
-        <a href="#fixed-tab-3" class="mdl-layout__tab">AboutUs</a>
+        <a href="#container_destinations" class="mdl-layout__tab"><i class="fa fa-picture-o" aria-hidden="true"></i> Destinations</a>
+        <a href="#survey-form" class="mdl-layout__tab"><i class="fa fa-envelope-open-o" aria-hidden="true"></i>
+          Survey Form</a>
       </div>
     </header>
     <!-- weather dashboard  -->
-    <div id="city" id="currentDay">
+    <!-- <div id="city" id="currentDay">
       <div class="card-body">
         <h5 class="card-title"></h5>
         <p class="card-text"></p>
-      </div> 
+      </div>  -->
       
     
-      <div class="mdl-layout__drawer"><i class="fas fa-bacteria"></i>
+      <div class="mdl-layout__drawer">
 
         <span class="mdl-layout-title">Coronavirus cases</span>
       </div>
@@ -66,15 +71,15 @@ mdl-layout--fixed-tabs">
         <button type="submit"><i class="fa fa-search" id="submitButton"></i></button>
       </form>
 
-      <div class="center_text3">View all our destinations here</div>
-
-   
+      <div >
+      <a href="https://travel.usnews.com/rankings/best-usa-vacations/" class="center_text3">View all our destinations here</a>
+    </div>
    
   
     </div>
     
 <div id="container_destinations">
-    <h3 style="text-align: center; color:#1ab2ff ; font-weight:bold">Top Destinations</h3>
+   <u> <h3 style="text-align: center; color:#1ab2ff ; font-weight:bold; margin-bottom: 1px;" >Top Destinations</h3></u>
 
     <section>
       <div class="containerImages">
@@ -96,9 +101,9 @@ mdl-layout--fixed-tabs">
 
   
     
-  
+  <div id="hotelWeatherCardContainer">
   <div id="suggested-hotels" class="mdl-grid">
-    
+
   </div>
 
   <!--container to hold covid data card-->
@@ -106,26 +111,26 @@ mdl-layout--fixed-tabs">
 
   </div>
 
-  
-  
-
+  </div>
+  <div id="weatherCard"></div>
+  </div>
 
     <div class="survey">
       <div id="outside">
-        <form id="survey-form">
-          <h1 id="title">Survey Form</h1>
-          <p id="description">Let us know how can we improve</p>
+     <form id="survey-form">
+         <u> <h1 id="title">Survey Form</h1></u>
+          <i><p id="description">Let us know how can we improve..</p></i>
           <div>
-            <label for="name_label"> Name</label>
-            <input type="text" id="name_label" name="user_name" placeholder="Enter name here"></div>
+            <label for="name_label"> Name</label><br/>
+            <input type="text" id="name_label" name="user_name" placeholder="Your name..."></div>
           <div>
-            <label for="email_label">Email</label>
-            <input type="email" id="email_label" name="email" placeholder="Enter adress here">
+            <label for="email_label">Email</label><br/>
+            <input type="email" id="email_label" name="email" placeholder="Your email...">
 
           </div>
           <div>
-            <label for="age_label">Age</label>
-            <input list="Age" placeholder="Enter age here">
+            <label for="age_label">Age</label><br/>
+            <input list="Age" id="age_label" placeholder="Your age...">
 
             <datalist id="Age">
 
@@ -141,8 +146,8 @@ mdl-layout--fixed-tabs">
             </datalist>
           </div>
           <div>
-            <label for="student_label">How was your experience with us?</label>
-            <input list="role">
+            <label for="student_label">How was your experience with us?</label><br/>
+            <input list="role" id="student_label">
             <datalist id="role">
               <optiom value="Excellent">
                 <option value="Very Good">
@@ -156,12 +161,13 @@ mdl-layout--fixed-tabs">
             </datalist>
           </div>
           <div>
+
             <label for="recommend">How likely are you to recommend us?</label><br>
 
             <input type="radio" id="Definately" name="recommend" value="Definately">
-            <label for="Definately">Definately</label><br>
-            <input type="radio" id="May be" name="recommend" value="May be">
-            <label for="May_be"> May Be</label><br>
+            <label for="Definately">Definately</label><br/>
+            <input type="radio" id="May_be" name="recommend" value="May_be">
+            <label for="May_be"> May Be</label><br/>
             <input type="radio" id="Not_sure" name="recommend" value="Not sure">
             <label for="Not_sure"> Not sure</label>
 
@@ -179,14 +185,11 @@ mdl-layout--fixed-tabs">
       <h5>Find Us On</h5>
       <div class="w3-xlarge w3-padding-16">
         <i class="fa fa-facebook-official w3-hover-opacity"></i>
-        <i class="fa fa-instagram w3-hover-opacity"></i>
-        <i class="fa fa-snapchat w3-hover-opacity"></i>
-        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="                fa fa-whatsapp w3-hover-opacity"></i>
+        <i class="fa fa-github w3-hover-opacity"></i>
         <i class="fa fa-linkedin w3-hover-opacity"></i>
       </div>
-      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank"
-          class="w3-hover-text-green"></a></p>
+      <p>Powered by <a href="https://www.google.com/" target="_blank" ></a>Team</p>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -197,7 +200,7 @@ mdl-layout--fixed-tabs">
 
     <!-- <script src="Assets/script.js"></script> -->
     <script src="Assets/loadDestinations.js"></script>
-    <!-- <script src="weather.js"></script> -->
+    <script src="Assets/weather.js"></script>
     <script src="Assets/bookingScript.js"></script>
 </body>
 
