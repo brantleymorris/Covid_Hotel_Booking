@@ -19,9 +19,7 @@ $.ajax(hotelSettings).done(function (response) {
 	console.log(response);
 	var suggestions = response.suggestions;
 	var lon = response.suggestions[0].entities[0].longitude;
-	console.log(lon);
 	var lat = response.suggestions[0].entities[0].latitude;
-	console.log(lat);
 
 	var hotelGroups = suggestions.find(function (element) {
 		return element.group === "HOTEL_GROUP"
@@ -79,7 +77,7 @@ $.ajax(hotelSettings).done(function (response) {
 			console.log(failReason);
 		});
 	
-	// put covid and location api here
+	// covid and location api here
 	var fccAPI = "https://geo.fcc.gov/api/census/area?lat=" + lat + "&lon=" + lon + "&format=json";
 
 	$.ajax({
@@ -152,7 +150,7 @@ $.ajax(hotelSettings).done(function (response) {
 		}
 
 		var stateQueryURL = "https://api.covidtracking.com/v1/states/" + stateParsed + "/current.json";
-
+// this is running 3x?, may need to move up
 		$.ajax({
 			url: stateQueryURL,
 			method: "GET"
@@ -173,10 +171,39 @@ $.ajax(hotelSettings).done(function (response) {
 				console.log(response);
 
 				var confirmedCases = response[0].stats.confirmed;
-				console.log("Confirmed cases: " + confirmedCases);
+
+				var covidCard = $("#covid-data");
+
+				var covidTitleDiv = $("<div>").attr("class", "mdl-card__title");
+				var covidTitle = $("<h2>").attr("class", "mdl-card__title-text").text("Covid Data");
+					
+				var covidGrid = $("<div>").attr("class", "mdl-grid");
+				var covidData = $("<div>").attr("class", "mdl-cell mdl-cell--6-col");
+
+				var covidCountyData = $("<div>").attr("class", "mdl-card");
+				var covidCountyTitle = $("<div>").attr("class", "mdl-card__title");
+				var covidCountyTitleText = $("<h4>").attr("class", "mdl-card__title-text").text(county + " county data:");
+				var countyActive = $("<body>").attr("class", "mdl-card__supporting-text").text("Confirmed cases: " + confirmedCases);
+		
+				var covidStateData = $("<div>").attr("class", "mdl-card");
+				var covidStateTitle = $("<div>").attr("class", "mdl-card__title");
+				var covidStateTitleText = $("<h4>").attr("class", "mdl-card__title-text").text(state + " data")
+				var stateActive = $("<body>").attr("class", "mdl-card__supporting-text").text("Active cases: " + activeCases);
+					
+				covidCountyTitle.append(covidCountyTitleText);
+				covidCountyData.append(covidCountyTitle, countyActive);
+
+				covidStateTitle.append(covidStateTitleText);
+				covidStateData.append(covidStateTitle, stateActive); 
+		
+				covidData.append(covidCountyData, covidStateData);
+				covidGrid.append(covidData);
+					
+				covidTitleDiv.append(covidTitle);
+				covidCard.append(covidTitleDiv, covidGrid);
 			});
 		});
-	});
+	}); // end of covid and location api
 	
 	})
 })
